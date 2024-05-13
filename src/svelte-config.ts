@@ -1,15 +1,9 @@
-// @ts-check
-
 import eslint from '@eslint/js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import eslintPluginSvelte from 'eslint-plugin-svelte';
 import globals from 'globals';
 import svelteParser from 'svelte-eslint-parser';
 import tseslint from 'typescript-eslint';
-
-// Take notes on the svelte-eslint-parser and the parser options it provides
-// Also test creating a single combined config for all files.
-// This GitHub issue might be helpful: https://github.com/typescript-eslint/typescript-eslint/issues/6778
 
 const defaultConfig = tseslint.config(
   {
@@ -95,12 +89,11 @@ const svelteConfig = tseslint.config({
   }
 });
 
-/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.ConfigArray} */
-export default [
+export default tseslint.config(
   ...defaultConfig,
   ...svelteConfig,
   {
     // other override settings. e.g. for `files: ['**/*.test.*']`
   },
   { ignores: ['.svelte-kit', '.yarn', 'build', 'node_modules', '**/.DS_Store'] } // overrides global ignores
-];
+);

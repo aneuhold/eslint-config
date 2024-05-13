@@ -1,5 +1,3 @@
-// @ts-check
-
 import eslint from '@eslint/js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import globals from 'globals';
@@ -47,11 +45,10 @@ const defaultConfig = tseslint.config(
   }
 );
 
-/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.ConfigArray} */
-export default [
+export default tseslint.config(
   ...defaultConfig,
   {
     // other override settings. e.g. for `files: ['**/*.test.*']`
   },
   { ignores: ['.yarn', 'build', 'lib', 'node_modules', '**/.DS_Store'] } // overrides global ignores
-];
+);

@@ -2,14 +2,17 @@
   "name": "@aneuhold/eslint-config",
   "version": "1.0.1",
   "description": "Main ESLint Configuration for personal projects",
-  "main": "src/index.js",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "packageManager": "yarn@4.2.2",
   "scripts": {
-    "pushpub": "npm version patch && git push && npm publish --access public",
+    "pushpub": "npm run build && npm version patch && git push && npm publish --access public",
+    "build": "tsc",
+    "watch": "tsc -w",
     "upgrade:all": "yarn upgrade --latest",
-    "lint": "eslint"
+    "lint": "yarn build && eslint"
   },
-  "type": "module",
+  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aneuhold/eslint-config.git"
@@ -25,7 +28,7 @@
   },
   "homepage": "https://github.com/aneuhold/eslint-config#readme",
   "files": [
-    "src/**/*"
+    "lib/**/*"
   ],
   "peerDependencies": {
     "eslint": ">= 9"
@@ -41,8 +44,11 @@
     "typescript-eslint": "^7.8.0"
   },
   "devDependencies": {
+    "@types/node": "^20.12.11",
     "eslint": "^9",
     "prettier": "^3.2.5",
+    "svelte": "^4.2.17",
+    "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   }
 }

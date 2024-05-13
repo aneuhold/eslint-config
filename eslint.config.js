@@ -1,3 +1,3 @@
-import tsLibConfig from './src/ts-lib-config.js';
+const config = (async () => (await import('./eslint.config.mjs')).default)();
 
-export default tsLibConfig;
+module.exports = config;
