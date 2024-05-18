@@ -21,3 +21,15 @@ export default [
   }
 ];
 ```
+
+## Usage
+
+Make sure to add the following settings to VSCode settings.json:
+
+```json
+{
+  "eslint.experimental.useFlatConfig": true,
+  "eslint.run": "onSave",
+  "eslint.format.enable": true
+}
+```
