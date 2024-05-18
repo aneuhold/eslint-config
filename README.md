@@ -9,6 +9,36 @@ Personal ESLint Configuration
 - In order for there not to be crossover between configuration dependencies, each config should be brought in as the full path to the configuration. For example:
 
 ```js
+import tsLibConfig from '@aneuhold/eslint-config/src/ts-lib-config.js';
+```
+
+## Usage
+
+Make sure to add the following settings to VSCode settings.json:
+
+```json
+{
+  "eslint.experimental.useFlatConfig": true,
+  "eslint.run": "onSave",
+  "eslint.format.enable": true,
+  // Extra setting below specifically for svelte
+  "eslint.validate": ["svelte"]
+}
+```
+
+### Setup for `CommonJS`
+
+Add `eslint.config.js` like so:
+
+```js
+const config = (async () => (await import('./eslint.config.mjs')).default)();
+
+module.exports = config;
+```
+
+Add `eslint.config.mjs` like so:
+
+```js
 // @ts-check
 
 import tsLibConfig from '@aneuhold/eslint-config/src/ts-lib-config.js';
@@ -22,14 +52,20 @@ export default [
 ];
 ```
 
-## Usage
+### Setup for `ESNext` (ES Modules)
 
-Make sure to add the following settings to VSCode settings.json:
+Add `eslint.config.js` like so:
 
-```json
-{
-  "eslint.experimental.useFlatConfig": true,
-  "eslint.run": "onSave",
-  "eslint.format.enable": true
-}
+```js
+// @ts-check
+
+import svelteConfig from '@aneuhold/eslint-config/src/svelte-config.js';
+
+/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.ConfigArray} */
+export default [
+  ...svelteConfig,
+  {
+    // other override settings. e.g. for `files: ['**/*.test.*']`
+  }
+];
 ```
