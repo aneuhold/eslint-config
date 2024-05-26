@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  buildAndPublish:
+  publish:
     name: 'Publish'
     runs-on: ubuntu-latest
 
