@@ -26,6 +26,17 @@ Make sure to add the following settings to VSCode settings.json:
 }
 ```
 
+Also as of 5/26/2024 make sure to add a resolution for Globals until that is fixed in other packages:
+
+```json
+  "resolutions": {
+    "globals": "^15.3.0"
+  },
+  "resolutionsComments": {
+    "globals": "This is a temporary fix for the globals package due to this issue: https://github.com/eslint/eslint/discussions/17868. Once other packages pull 15+ then should be able to remove this"
+  }
+```
+
 ### Setup for `CommonJS`
 
 Add `eslint.config.js` like so:
