@@ -5,7 +5,7 @@
   "main": "./src/ts-lib-config.js",
   "packageManager": "yarn@4.2.2",
   "scripts": {
-    "pushpub": "yarn build && npm version patch && git push",
+    "pushpub": "npm version patch && git push",
     "upgrade:all": "yarn upgrade --latest",
     "lint": "yarn eslint"
   },
