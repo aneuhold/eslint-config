@@ -1,6 +1,6 @@
 {
   "name": "@aneuhold/eslint-config",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Main ESLint Configuration for personal projects",
   "main": "./src/ts-lib-config.js",
   "packageManager": "yarn@4.3.1",
@@ -28,22 +28,22 @@
     "src/**/*"
   ],
   "peerDependencies": {
-    "eslint": ">= 9.7.0"
+    "eslint": ">= 9.8.0"
   },
   "dependencies": {
-    "@eslint/js": "^9.7.0",
-    "@typescript-eslint/eslint-plugin": "^7.16.1",
-    "@typescript-eslint/parser": "^7.16.1",
+    "@eslint/js": "^9.8.0",
+    "@typescript-eslint/eslint-plugin": "^7.17.0",
+    "@typescript-eslint/parser": "^7.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-svelte": "^2.43.0",
     "prettier-plugin-svelte": "^3.2.6",
-    "typescript-eslint": "^7.16.1"
+    "typescript-eslint": "^7.17.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",
-    "eslint": "^9.7.0",
+    "eslint": "^9.8.0",
     "prettier": "^3.3.3",
     "svelte": "^4.2.18",
     "typescript": "^5.5.2"
