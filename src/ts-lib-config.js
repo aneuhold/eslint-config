@@ -35,7 +35,10 @@ const defaultConfig = tseslint.config(
           allowNumber: true,
           allowBoolean: true
         }
-      ]
+      ],
+      // Turned off because it doesn't seem too helpful, and it likes to error
+      // on things that seem to be just fine in generics.
+      '@typescript-eslint/no-unnecessary-type-parameters': 'off'
     }
   },
   {
