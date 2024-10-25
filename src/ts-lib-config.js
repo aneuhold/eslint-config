@@ -10,7 +10,7 @@ const defaultConfig = tseslint.config(
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.strictTypeChecked,
-      jsdoc.configs['flat/recommended-typescript'],
+      jsdoc.configs['flat/recommended-typescript-error'],
       eslintPluginPrettierRecommended
     ],
     languageOptions: {
@@ -23,6 +23,8 @@ const defaultConfig = tseslint.config(
     },
     // Rules for js, and ts in ts files
     rules: {
+      // Makes it so that there's 1 line above tags in jsdoc comments.
+      'jsdoc/tag-lines': ['error', 'any', { startLines: 1 }],
       'no-use-before-define': 'off',
       'no-undef': 'off',
       // Just 100% disagree with this rule. The reasoning is that using a
@@ -55,5 +57,14 @@ export default tseslint.config(
   {
     // other override settings. e.g. for `files: ['**/*.test.*']`
   },
-  { ignores: ['.yarn', 'build', 'lib', 'node_modules', '**/.DS_Store'] } // overrides global ignores
+  {
+    ignores: [
+      '.yarn',
+      'build',
+      'lib',
+      'node_modules',
+      'eslint.config.js',
+      '**/.DS_Store'
+    ]
+  } // overrides global ignores
 );

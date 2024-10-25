@@ -4,6 +4,7 @@ import eslintPluginSvelte from 'eslint-plugin-svelte';
 import globals from 'globals';
 import svelteParser from 'svelte-eslint-parser';
 import tseslint from 'typescript-eslint';
+import jsdoc from 'eslint-plugin-jsdoc';
 
 const defaultConfig = tseslint.config(
   {
@@ -11,6 +12,7 @@ const defaultConfig = tseslint.config(
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.strictTypeChecked,
+      jsdoc.configs['flat/recommended-typescript'],
       eslintPluginPrettierRecommended
     ],
     languageOptions: {
@@ -25,6 +27,8 @@ const defaultConfig = tseslint.config(
     // Rules for js, and ts in ts files and svelte files
     //don't set 'svelte/*' rules here
     rules: {
+      // Makes it so that there's 1 line above tags in jsdoc comments.
+      'jsdoc/tag-lines': ['warn', 'any', { startLines: 1 }],
       'no-use-before-define': 'off',
       'no-undef': 'off',
       // Just 100% disagree with this rule. The reasoning is that using a
@@ -107,5 +111,14 @@ export default tseslint.config(
   {
     // other override settings. e.g. for `files: ['**/*.test.*']`
   },
-  { ignores: ['.svelte-kit', '.yarn', 'build', 'node_modules', '**/.DS_Store'] } // overrides global ignores
+  {
+    ignores: [
+      '.svelte-kit',
+      '.yarn',
+      'build',
+      'node_modules',
+      '**/.DS_Store',
+      'eslint.config.js'
+    ]
+  } // overrides global ignores
 );
