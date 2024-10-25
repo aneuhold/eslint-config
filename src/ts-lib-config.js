@@ -2,6 +2,7 @@ import eslint from '@eslint/js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import jsdoc from 'eslint-plugin-jsdoc';
 
 const defaultConfig = tseslint.config(
   {
@@ -9,12 +10,13 @@ const defaultConfig = tseslint.config(
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.strictTypeChecked,
+      jsdoc.configs['flat/recommended-typescript'],
       eslintPluginPrettierRecommended
     ],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
-        sourceType: 'commonjs',
+        sourceType: 'module',
         project: true
       },
       globals: { ...globals.node }
