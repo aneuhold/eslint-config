@@ -10,7 +10,7 @@ const defaultConfig = tseslint.config(
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.strictTypeChecked,
-      jsdoc.configs['flat/recommended-typescript-error'],
+      jsdoc.configs['flat/recommended-typescript'],
       eslintPluginPrettierRecommended
     ],
     languageOptions: {
