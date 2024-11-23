@@ -1,6 +1,6 @@
 {
   "name": "@aneuhold/eslint-config",
-  "version": "1.0.44",
+  "version": "1.0.45",
   "description": "Main ESLint Configuration for personal projects",
   "main": "./src/ts-lib-config.js",
   "packageManager": "yarn@4.5.1",
@@ -39,7 +39,7 @@
     "eslint-plugin-jsdoc": "^50.5.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-svelte": "^2.46.0",
-    "prettier-plugin-svelte": "^3.2.8",
+    "prettier-plugin-svelte": "^3.3.2",
     "typescript-eslint": "^8.15.0"
   },
   "devDependencies": {
