@@ -1,6 +1,6 @@
 {
   "name": "@aneuhold/eslint-config",
-  "version": "1.0.57",
+  "version": "1.0.58",
   "description": "Main ESLint Configuration for personal projects",
   "main": "./src/ts-lib-config.js",
   "packageManager": "yarn@4.6.0",
