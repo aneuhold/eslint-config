@@ -1,9 +1,9 @@
 {
   "name": "@aneuhold/eslint-config",
-  "version": "1.0.77",
+  "version": "1.0.78",
   "description": "Main ESLint Configuration for personal projects",
   "main": "./src/ts-lib-config.js",
-  "packageManager": "yarn@4.6.0",
+  "packageManager": "yarn@4.7.0",
   "scripts": {
     "pushpub": "npm version patch && git push",
     "upgrade:all": "yarn upgrade --latest",
