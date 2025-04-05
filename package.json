@@ -1,6 +1,6 @@
 {
   "name": "@aneuhold/eslint-config",
-  "version": "1.0.82",
+  "version": "1.0.83",
   "description": "Main ESLint Configuration for personal projects",
   "main": "./src/ts-lib-config.js",
   "packageManager": "yarn@4.6.0",
@@ -28,28 +28,28 @@
     "src/**/*"
   ],
   "peerDependencies": {
-    "eslint": ">= 9.23.0"
+    "eslint": ">= 9.24.0"
   },
   "dependencies": {
-    "@eslint/js": "^9.23.0",
+    "@eslint/js": "^9.24.0",
     "@stylistic/eslint-plugin-js": "^3.0.0",
     "@stylistic/eslint-plugin-ts": "^3.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.28.0",
-    "@typescript-eslint/parser": "^8.28.0",
+    "@typescript-eslint/eslint-plugin": "^8.29.0",
+    "@typescript-eslint/parser": "^8.29.0",
     "angular-eslint": "^18.4.2",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsdoc": "^50.6.9",
     "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-prettier": "^5.2.5",
-    "eslint-plugin-svelte": "^3.4.0",
+    "eslint-plugin-prettier": "^5.2.6",
+    "eslint-plugin-svelte": "^3.5.1",
     "eslint-plugin-unused-imports": "^4.1.4",
     "prettier-plugin-svelte": "^3.3.3",
-    "typescript-eslint": "^8.28.0"
+    "typescript-eslint": "^8.29.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
-    "eslint": "^9.23.0",
+    "eslint": "^9.24.0",
     "prettier": "^3.5.3",
     "svelte": "^4.2.19",
     "typescript": "^5.8.3"
