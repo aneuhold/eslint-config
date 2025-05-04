@@ -1,6 +1,6 @@
 {
   "name": "@aneuhold/eslint-config",
-  "version": "1.0.90",
+  "version": "1.0.91",
   "description": "Main ESLint Configuration for personal projects",
   "main": "./src/ts-lib-config.js",
   "packageManager": "yarn@4.6.0",
@@ -41,7 +41,7 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsdoc": "^50.6.11",
     "eslint-plugin-prefer-arrow": "^1.2.3",
-    "eslint-plugin-prettier": "^5.2.6",
+    "eslint-plugin-prettier": "^5.3.1",
     "eslint-plugin-svelte": "^3.5.1",
     "eslint-plugin-unused-imports": "^4.1.4",
     "prettier-plugin-svelte": "^3.3.3",
