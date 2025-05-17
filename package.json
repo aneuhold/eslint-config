@@ -1,6 +1,6 @@
 {
   "name": "@aneuhold/eslint-config",
-  "version": "1.0.94",
+  "version": "1.0.95",
   "description": "Main ESLint Configuration for personal projects",
   "main": "./src/ts-lib-config.js",
   "packageManager": "yarn@4.6.0",
@@ -48,7 +48,7 @@
     "typescript-eslint": "^8.32.0"
   },
   "devDependencies": {
-    "@types/node": "^22.15.17",
+    "@types/node": "^22.15.18",
     "eslint": "^9.26.0",
     "prettier": "^3.5.3",
     "svelte": "^4.2.19",
