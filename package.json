@@ -5,6 +5,7 @@
   "main": "./src/ts-lib-config.js",
   "packageManager": "yarn@4.9.2",
   "scripts": {
+    "dev": "nodemon -e js --exec \"local-npm publish\"",
     "pushpub": "npm version patch && git push",
     "upgrade:all": "yarn upgrade --latest",
     "lint": "yarn eslint"
@@ -16,7 +17,8 @@
   },
   "keywords": [
     "eslint",
-    "eslintconfig"
+    "eslintconfig",
+    "prettier"
   ],
   "author": "Anton G. Neuhold Jr.",
   "license": "MIT",
@@ -28,7 +30,8 @@
     "src/**/*"
   ],
   "peerDependencies": {
-    "eslint": ">= 9.33.0"
+    "eslint": ">= 9.33.0",
+    "prettier": ">= 3.6.2"
   },
   "dependencies": {
     "@eslint/js": "^9.33.0",
@@ -42,12 +45,16 @@
     "eslint-plugin-jsdoc": "^54.0.0",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
     "eslint-plugin-svelte": "^3.11.0",
     "eslint-plugin-unused-imports": "^4.1.4",
+    "globals": "^16.3.0",
     "prettier-plugin-svelte": "^3.4.0",
     "typescript-eslint": "^8.39.1"
   },
   "devDependencies": {
+    "@aneuhold/local-npm-registry": "^0.2.11",
     "@types/node": "^22.17.1",
     "eslint": "^9.33.0",
     "prettier": "^3.6.2",
