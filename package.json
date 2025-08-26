@@ -58,7 +58,7 @@
     "@types/node": "^22.18.0",
     "eslint": "^9.34.0",
     "prettier": "^3.6.2",
-    "svelte": "^5.38.1",
+    "svelte": "^5.38.3",
     "typescript": "^5.9.2"
   }
 }
