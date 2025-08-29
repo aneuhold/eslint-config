@@ -17,5 +17,5 @@ localData/
 ### Tests ###
 .env
 
-### Yarn ###
-.yarn
+### pnpm ###
+.pnpm-store
