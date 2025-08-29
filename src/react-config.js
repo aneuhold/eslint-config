@@ -2,31 +2,40 @@ import js from '@eslint/js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
-import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
-export default defineConfig([
+export default tseslint.config([
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     extends: [
       js.configs.recommended,
-      tseslint.configs.strictTypeChecked,
       reactHooks.configs['recommended-latest'],
       reactRefresh.configs.vite,
       eslintPluginPrettierRecommended
     ],
     languageOptions: {
-      ecmaVersion: 2020,
       globals: globals.browser,
       parserOptions: {
-        ecmaVersion: 'latest',
-        ecmaFeatures: { jsx: true },
         sourceType: 'module'
       }
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }]
+    }
+  },
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [tseslint.configs.strictTypeChecked],
+    languageOptions: {
+      parser: tseslint.parser,
+      globals: globals.browser,
+      parserOptions: {
+        sourceType: 'module',
+        // "project" looks to be deprecated, so use "projectService" instead.
+        // See https://typescript-eslint.io/getting-started/typed-linting
+        projectService: true
+      }
     }
   },
   {

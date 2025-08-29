@@ -99,7 +99,6 @@ const svelteConfig = tseslint.config({
     }
   },
   // Svelte Rules
-  /** @type {import('eslint').Linter.RulesRecord} */
   rules: {
     // 'svelte/valid-compile': ['warn']
   }

@@ -6,6 +6,7 @@
   "packageManager": "pnpm@10.15.0",
   "scripts": {
     "dev": "nodemon -e js --exec \"local-npm publish\"",
+    "unpub": "local-npm unpublish",
     "pushpub": "pnpm version patch && git push",
     "upgrade:all": "pnpm update --latest",
     "lint": "pnpm eslint"
