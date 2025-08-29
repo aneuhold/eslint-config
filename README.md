@@ -18,13 +18,32 @@ Make sure to add the following settings to VSCode settings.json:
 
 ```json
 {
+  // Use prettier for all files that ESLint doesn't support
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  // Use ESLint for all file types that it supports (which still uses prettier behind the scenes)
+  "[typescript][javascript][javascriptreact][typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.organizeImports": "explicit"
+  },
   "eslint.useFlatConfig": true,
   "eslint.run": "onSave",
   "eslint.format.enable": true,
-  // Extra setting below specifically for svelte
-  "eslint.validate": ["svelte"]
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+    // Add "svelte" here if using Svelte
+  ]
 }
 ```
+
+Then add a prettier file, such as the one in this repo [here](.prettierrc.js).
 
 ### Setup for `CommonJS`
 
