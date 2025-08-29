@@ -1,8 +1,8 @@
 import eslint from '@eslint/js';
+import jsdoc from 'eslint-plugin-jsdoc';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import jsdoc from 'eslint-plugin-jsdoc';
 
 const defaultConfig = tseslint.config(
   {
@@ -11,15 +11,15 @@ const defaultConfig = tseslint.config(
       eslint.configs.recommended,
       ...tseslint.configs.strictTypeChecked,
       jsdoc.configs['flat/recommended-typescript'],
-      eslintPluginPrettierRecommended
+      eslintPluginPrettierRecommended,
     ],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
         sourceType: 'module',
-        project: true
+        project: true,
       },
-      globals: { ...globals.node }
+      globals: { ...globals.node },
     },
     // Rules for js, and ts in ts files
     rules: {
@@ -38,18 +38,18 @@ const defaultConfig = tseslint.config(
         'error',
         {
           allowNumber: true,
-          allowBoolean: true
-        }
+          allowBoolean: true,
+        },
       ],
       // Turned off because it doesn't seem too helpful, and it likes to error
       // on things that seem to be just fine in generics.
-      '@typescript-eslint/no-unnecessary-type-parameters': 'off'
-    }
+      '@typescript-eslint/no-unnecessary-type-parameters': 'off',
+    },
   },
   {
     // disable type-aware linting on JS files
     files: ['**/*.js', '**/*.mjs'],
-    extends: [tseslint.configs.disableTypeChecked]
+    extends: [tseslint.configs.disableTypeChecked],
   }
 );
 
@@ -59,13 +59,6 @@ export default tseslint.config(
     // other override settings. e.g. for `files: ['**/*.test.*']`
   },
   {
-    ignores: [
-      '.yarn',
-      'build',
-      'lib',
-      'node_modules',
-      'eslint.config.js',
-      '**/.DS_Store'
-    ]
+    ignores: ['.yarn', 'build', 'lib', 'node_modules', 'eslint.config.js', '**/.DS_Store'],
   } // overrides global ignores
 );

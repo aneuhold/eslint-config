@@ -1,10 +1,10 @@
 import eslint from '@eslint/js';
+import jsdoc from 'eslint-plugin-jsdoc';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import eslintPluginSvelte from 'eslint-plugin-svelte';
 import globals from 'globals';
 import svelteParser from 'svelte-eslint-parser';
 import tseslint from 'typescript-eslint';
-import jsdoc from 'eslint-plugin-jsdoc';
 
 const defaultConfig = tseslint.config(
   {
@@ -111,13 +111,6 @@ export default tseslint.config(
     // other override settings. e.g. for `files: ['**/*.test.*']`
   },
   {
-    ignores: [
-      '.svelte-kit',
-      '.yarn',
-      'build',
-      'node_modules',
-      '**/.DS_Store',
-      'eslint.config.js'
-    ]
+    ignores: ['.svelte-kit', '.yarn', 'build', 'node_modules', '**/.DS_Store', 'eslint.config.js']
   } // overrides global ignores
 );

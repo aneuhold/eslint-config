@@ -7,12 +7,12 @@ import tseslint from 'typescript-eslint';
 // Allows us to bring in the recommended rules for Angular projects from angular-eslint
 import angular from 'angular-eslint';
 
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-import eslintPluginImport from 'eslint-plugin-import';
-import eslintPluginJsdoc from 'eslint-plugin-jsdoc';
-import eslintPluginUnusedImports from 'eslint-plugin-unused-imports';
 import stylisticJs from '@stylistic/eslint-plugin-js';
 import stylisticTs from '@stylistic/eslint-plugin-ts';
+import eslintPluginImport from 'eslint-plugin-import';
+import eslintPluginJsdoc from 'eslint-plugin-jsdoc';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import eslintPluginUnusedImports from 'eslint-plugin-unused-imports';
 
 // Export our config array, which is composed together thanks to the typed utility function from typescript-eslint
 export default tseslint.config(
@@ -122,8 +122,7 @@ export default tseslint.config(
         'warn',
         {
           alphabetize: {
-            order:
-              'asc' /* sort in ascending order. Options: ['ignore', 'asc', 'desc'] */,
+            order: 'asc' /* sort in ascending order. Options: ['ignore', 'asc', 'desc'] */,
             caseInsensitive: true /* ignore case. Options: [true, false] */
           },
           'newlines-between': 'never'

@@ -12,17 +12,17 @@ export default tseslint.config([
       js.configs.recommended,
       reactHooks.configs['recommended-latest'],
       reactRefresh.configs.vite,
-      eslintPluginPrettierRecommended
+      eslintPluginPrettierRecommended,
     ],
     languageOptions: {
       globals: globals.browser,
       parserOptions: {
-        sourceType: 'module'
-      }
+        sourceType: 'module',
+      },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }]
-    }
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+    },
   },
   {
     files: ['**/*.{ts,tsx}'],
@@ -34,11 +34,11 @@ export default tseslint.config([
         sourceType: 'module',
         // "project" looks to be deprecated, so use "projectService" instead.
         // See https://typescript-eslint.io/getting-started/typed-linting
-        projectService: true
-      }
-    }
+        projectService: true,
+      },
+    },
   },
   {
-    ignores: ['.yarn', 'build', 'dist', 'node_modules', '**/.DS_Store']
-  }
+    ignores: ['.yarn', 'build', 'dist', 'node_modules', '**/.DS_Store'],
+  },
 ]);
