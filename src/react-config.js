@@ -37,6 +37,10 @@ export default tseslint.config([
         projectService: true,
       },
     },
+    rules: {
+      // Just kind of annoying in TS files.
+      '@typescript-eslint/restrict-template-expressions': 'off',
+    },
   },
   {
     ignores: ['.yarn', 'build', 'dist', 'node_modules', '**/.DS_Store'],
