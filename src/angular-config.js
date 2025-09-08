@@ -30,7 +30,7 @@ export default tseslint.config(
       // Apply the recommended Angular rules
       ...angular.configs.tsRecommended,
       // Apply prettier styling rules last
-      eslintPluginPrettierRecommended
+      eslintPluginPrettierRecommended,
     ],
     // Plugins are brought in using the name they use in the rule. So 'import/no-deprecated' needs 'import'
     plugins: {
@@ -38,7 +38,7 @@ export default tseslint.config(
       jsdoc: eslintPluginJsdoc,
       'unused-imports': eslintPluginUnusedImports,
       '@stylistic/js': stylisticJs,
-      '@stylistic/ts': stylisticTs
+      '@stylistic/ts': stylisticTs,
     },
     // Set the custom processor which will allow us to have our inline Component templates extracted
     // and treated as if they are HTML files (and therefore have the .html config below applied to them)
@@ -49,8 +49,8 @@ export default tseslint.config(
         'error',
         {
           type: 'element',
-          style: 'kebab-case'
-        }
+          style: 'kebab-case',
+        },
       ],
       // The below rule should be set as an error but it happens in so many files
       // it would take a lot of effort to convert and test everything.
@@ -58,8 +58,8 @@ export default tseslint.config(
       '@angular-eslint/component-class-suffix': [
         'warn',
         {
-          suffixes: ['Component', 'Page']
-        }
+          suffixes: ['Component', 'Page'],
+        },
       ],
       // Below rule was turned off to allow for member-ordering to take
       // precedence.
@@ -71,13 +71,13 @@ export default tseslint.config(
         {
           multiline: {
             delimiter: 'semi',
-            requireLast: true
+            requireLast: true,
           },
           singleline: {
             delimiter: 'semi',
-            requireLast: false
-          }
-        }
+            requireLast: false,
+          },
+        },
       ],
       '@typescript-eslint/member-ordering': 'warn',
       '@typescript-eslint/no-empty-function': 'off',
@@ -89,8 +89,8 @@ export default tseslint.config(
       '@typescript-eslint/no-shadow': [
         'error',
         {
-          hoist: 'all'
-        }
+          hoist: 'all',
+        },
       ],
       '@typescript-eslint/no-var-requires': 'off',
       '@typescript-eslint/no-inferrable-types': 'off',
@@ -101,8 +101,8 @@ export default tseslint.config(
         {
           path: 'always',
           types: 'prefer-import',
-          lib: 'always'
-        }
+          lib: 'always',
+        },
       ],
       '@stylistic/ts/type-annotation-spacing': 'error',
       '@typescript-eslint/typedef': 'off',
@@ -123,10 +123,10 @@ export default tseslint.config(
         {
           alphabetize: {
             order: 'asc' /* sort in ascending order. Options: ['ignore', 'asc', 'desc'] */,
-            caseInsensitive: true /* ignore case. Options: [true, false] */
+            caseInsensitive: true /* ignore case. Options: [true, false] */,
           },
-          'newlines-between': 'never'
-        }
+          'newlines-between': 'never',
+        },
       ],
       'jsdoc/check-alignment': 'error',
       'jsdoc/check-indentation': 'warn',
@@ -135,8 +135,8 @@ export default tseslint.config(
         'warn',
         {
           code: 140,
-          ignoreStrings: true
-        }
+          ignoreStrings: true,
+        },
       ],
       '@stylistic/js/new-parens': 'error',
       'no-bitwise': 'error',
@@ -155,8 +155,8 @@ export default tseslint.config(
         'warn',
         {
           enforceInMethodNames: true,
-          allowAfterThis: true
-        }
+          allowAfterThis: true,
+        },
       ],
       'no-unsafe-finally': 'error',
       'no-unused-expressions': 'error',
@@ -167,8 +167,8 @@ export default tseslint.config(
         'error',
         'always',
         {
-          markers: ['/']
-        }
+          markers: ['/'],
+        },
       ],
       'use-isnan': 'error',
       //The following removes unused imports
@@ -180,10 +180,10 @@ export default tseslint.config(
           vars: 'all',
           varsIgnorePattern: '^_',
           args: 'after-used',
-          argsIgnorePattern: '^_'
-        }
-      ]
-    }
+          argsIgnorePattern: '^_',
+        },
+      ],
+    },
   },
   {
     // Everything in this config object targets our HTML files (external templates,
@@ -197,16 +197,16 @@ export default tseslint.config(
       // the future.
       // ...angular.configs.templateAccessibility,
       // Apply the prettier config
-      eslintPluginPrettierRecommended
+      eslintPluginPrettierRecommended,
     ],
     rules: {
       'prettier/prettier': [
         'error',
         {
           parser: 'angular',
-          endOfLine: 'auto'
-        }
-      ]
-    }
+          endOfLine: 'auto',
+        },
+      ],
+    },
   }
 );

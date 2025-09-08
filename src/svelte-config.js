@@ -13,16 +13,16 @@ const defaultConfig = tseslint.config(
       eslint.configs.recommended,
       ...tseslint.configs.strictTypeChecked,
       jsdoc.configs['flat/recommended-typescript'],
-      eslintPluginPrettierRecommended
+      eslintPluginPrettierRecommended,
     ],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
         sourceType: 'module',
         extraFileExtensions: ['.svelte'],
-        project: true
+        project: true,
       },
-      globals: { ...globals.browser, ...globals.node }
+      globals: { ...globals.browser, ...globals.node },
     },
     // Rules for js, and ts in ts files and svelte files
     //don't set 'svelte/*' rules here
@@ -41,8 +41,8 @@ const defaultConfig = tseslint.config(
         'error',
         {
           allowNumber: true,
-          allowBoolean: true
-        }
+          allowBoolean: true,
+        },
       ],
       // ❗️ This should really be turned back on. It is turned off for now,
       // because it seems that the type definitions on the backend are wrong.
@@ -67,18 +67,18 @@ const defaultConfig = tseslint.config(
           argsIgnorePattern: '^_',
           caughtErrorsIgnorePattern: '^_',
           destructuredArrayIgnorePattern: '^_',
-          varsIgnorePattern: '^_'
-        }
+          varsIgnorePattern: '^_',
+        },
       ],
       // Turned off because it doesn't seem too helpful, and it likes to error
       // on things that seem to be just fine in generics.
-      '@typescript-eslint/no-unnecessary-type-parameters': 'off'
-    }
+      '@typescript-eslint/no-unnecessary-type-parameters': 'off',
+    },
   },
   {
     // disable type-aware linting on JS files
     files: ['**/*.js'],
-    extends: [tseslint.configs.disableTypeChecked]
+    extends: [tseslint.configs.disableTypeChecked],
   }
 );
 
@@ -87,7 +87,7 @@ const svelteConfig = tseslint.config({
   // @ts-expect-error - eslint-plugin-svelte is not typed
   extends: [
     ...eslintPluginSvelte.configs['flat/recommended'],
-    ...eslintPluginSvelte.configs['flat/prettier']
+    ...eslintPluginSvelte.configs['flat/prettier'],
   ],
   languageOptions: {
     parser: svelteParser,
@@ -95,13 +95,13 @@ const svelteConfig = tseslint.config({
       parser: tseslint.parser,
       sourceType: 'module',
       extraFileExtensions: ['.svelte'],
-      project: true
-    }
+      project: true,
+    },
   },
   // Svelte Rules
   rules: {
     // 'svelte/valid-compile': ['warn']
-  }
+  },
 });
 
 export default tseslint.config(
@@ -111,6 +111,6 @@ export default tseslint.config(
     // other override settings. e.g. for `files: ['**/*.test.*']`
   },
   {
-    ignores: ['.svelte-kit', '.yarn', 'build', 'node_modules', '**/.DS_Store', 'eslint.config.js']
+    ignores: ['.svelte-kit', '.yarn', 'build', 'node_modules', '**/.DS_Store', 'eslint.config.js'],
   } // overrides global ignores
 );
