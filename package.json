@@ -1,9 +1,9 @@
 {
   "name": "@aneuhold/eslint-config",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Main ESLint Configuration for personal projects",
   "main": "./src/ts-lib-config.js",
-  "packageManager": "pnpm@10.15.1",
+  "packageManager": "pnpm@10.17.1",
   "scripts": {
     "dev": "nodemon -e js --exec \"local-npm publish\"",
     "unpub": "local-npm unpublish",
@@ -31,7 +31,7 @@
     "src/**/*"
   ],
   "peerDependencies": {
-    "eslint": ">= 9.35.0",
+    "eslint": ">= 9.36.0",
     "prettier": ">= 3.6.2"
   },
   "dependencies": {
