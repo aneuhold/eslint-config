@@ -1,11 +1,11 @@
 import nextPlugin from '@next/eslint-plugin-next';
-import tseslint from 'typescript-eslint';
+import { defineConfig } from 'eslint/config';
 import reactConfig from './react-config.js';
 
 // Ya, this is kind of weird, but if you dig into the actual code in the next plugin, this is correct.
 const { flatConfig } = nextPlugin;
 
-export default tseslint.config(
+export default defineConfig(
   ...reactConfig,
   {
     files: ['**/*.{js,jsx,ts,tsx}'],

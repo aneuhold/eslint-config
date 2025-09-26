@@ -1,10 +1,11 @@
 import eslint from '@eslint/js';
 import jsdoc from 'eslint-plugin-jsdoc';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
-const defaultConfig = tseslint.config(
+const defaultConfig = defineConfig(
   {
     files: ['**/*.js', '**/*.mjs', '**/*.ts'],
     extends: [
@@ -53,7 +54,7 @@ const defaultConfig = tseslint.config(
   }
 );
 
-export default tseslint.config(
+export default defineConfig(
   ...defaultConfig,
   {
     // other override settings. e.g. for `files: ['**/*.test.*']`
