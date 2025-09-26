@@ -2,11 +2,12 @@ import eslint from '@eslint/js';
 import jsdoc from 'eslint-plugin-jsdoc';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import eslintPluginSvelte from 'eslint-plugin-svelte';
+import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import svelteParser from 'svelte-eslint-parser';
 import tseslint from 'typescript-eslint';
 
-const defaultConfig = tseslint.config(
+const defaultConfig = defineConfig(
   {
     files: ['**/*.js', '**/*.ts', '**/*.svelte'],
     extends: [
@@ -20,7 +21,7 @@ const defaultConfig = tseslint.config(
       parserOptions: {
         sourceType: 'module',
         extraFileExtensions: ['.svelte'],
-        project: true,
+        projectService: true,
       },
       globals: { ...globals.browser, ...globals.node },
     },
@@ -82,7 +83,7 @@ const defaultConfig = tseslint.config(
   }
 );
 
-const svelteConfig = tseslint.config({
+const svelteConfig = defineConfig({
   files: ['**/*.svelte'],
   // @ts-expect-error - eslint-plugin-svelte is not typed
   extends: [
@@ -95,22 +96,31 @@ const svelteConfig = tseslint.config({
       parser: tseslint.parser,
       sourceType: 'module',
       extraFileExtensions: ['.svelte'],
-      project: true,
+      projectService: true,
     },
   },
   // Svelte Rules
   rules: {
-    // 'svelte/valid-compile': ['warn']
+    'svelte/no-navigation-without-resolve': [
+      'error',
+      {
+        ignoreGoto: false,
+        ignoreLinks: true,
+        ignorePushState: false,
+        ignoreReplaceState: false,
+      },
+    ],
   },
 });
 
-export default tseslint.config(
+export default defineConfig(
   ...defaultConfig,
   ...svelteConfig,
   {
     // other override settings. e.g. for `files: ['**/*.test.*']`
   },
   {
+    // overrides global ignores
     ignores: ['.svelte-kit', '.yarn', 'build', 'node_modules', '**/.DS_Store', 'eslint.config.js'],
-  } // overrides global ignores
+  }
 );
