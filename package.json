@@ -60,7 +60,7 @@
     "@types/node": "^24.9.1",
     "eslint": "^9.38.0",
     "prettier": "^3.6.2",
-    "svelte": "^5.41.0",
+    "svelte": "^5.41.4",
     "typescript": "^5.9.3"
   }
 }
