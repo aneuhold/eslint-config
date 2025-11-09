@@ -1,6 +1,7 @@
 import eslint from '@eslint/js';
 import jsdoc from 'eslint-plugin-jsdoc';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import eslintPluginSvelte from 'eslint-plugin-svelte';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
@@ -16,6 +17,9 @@ const defaultConfig = defineConfig(
       jsdoc.configs['flat/recommended-typescript'],
       eslintPluginPrettierRecommended,
     ],
+    plugins: {
+      'simple-import-sort': simpleImportSort,
+    },
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
@@ -32,6 +36,25 @@ const defaultConfig = defineConfig(
       'jsdoc/tag-lines': ['warn', 'any', { startLines: 1 }],
       'jsdoc/require-jsdoc': ['off'],
       'jsdoc/require-returns': 'off',
+
+      // simple-import-sort: use a single inner array to avoid blank lines between groups
+      // See docs here: https://github.com/lydell/eslint-plugin-simple-import-sort?tab=readme-ov-file#how-is-this-rule-different-from-importorder
+      'simple-import-sort/imports': [
+        'error',
+        {
+          groups: [
+            [
+              '^\\u0000', // side effect imports
+              '^node:',
+              '^@?\\w', // packages
+              '^', // absolute imports
+              '^\\.', // relative imports
+            ],
+          ],
+        },
+      ],
+      'simple-import-sort/exports': 'error',
+
       'no-use-before-define': 'off',
       'no-undef': 'off',
       // Just 100% disagree with this rule. The reasoning is that using a
