@@ -123,6 +123,6 @@ export default defineConfig(
   },
   {
     // overrides global ignores
-    ignores: ['.svelte-kit', '.yarn', 'build', 'node_modules', '**/.DS_Store', 'eslint.config.js'],
+    ignores: ['.svelte-kit', '.yarn', 'build', 'node_modules', '**/.DS_Store'],
   }
 );
