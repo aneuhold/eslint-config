@@ -31,6 +31,7 @@ const defaultConfig = defineConfig(
       // Makes it so that there's 1 line above tags in jsdoc comments.
       'jsdoc/tag-lines': ['warn', 'any', { startLines: 1 }],
       'jsdoc/require-jsdoc': ['off'],
+      'jsdoc/require-returns': 'off',
       'no-use-before-define': 'off',
       'no-undef': 'off',
       // Just 100% disagree with this rule. The reasoning is that using a
