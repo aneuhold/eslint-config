@@ -39,6 +39,9 @@ const defaultConfig = defineConfig(
 
       // simple-import-sort: use a single inner array to avoid blank lines between groups
       // See docs here: https://github.com/lydell/eslint-plugin-simple-import-sort?tab=readme-ov-file#how-is-this-rule-different-from-importorder
+      // Originally I added this to avoid VS Code auto-sorting putting a blank line SPECIFICALLY after
+      // exports when there are only exports in a file and more than 1 of them, which was conflicting
+      // with prettier. Lol. But this is a lot more configurable anyway ❤️
       'simple-import-sort/imports': [
         'error',
         {
