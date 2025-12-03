@@ -35,6 +35,9 @@ const defaultConfig = defineConfig(
       // This provides context to what the class is doing, and allows for
       // better code completion + refactoring.
       '@typescript-eslint/no-extraneous-class': 'off',
+      // Just makes it so that the rule about https://typescript-eslint.io/rules/unbound-method/ can
+      // be followed. Otherwise, it doesn't allow you to do the things it suggests to fix the issue.
+      '@typescript-eslint/no-invalid-void-type': ['error', { allowAsThisParameter: true }],
       '@typescript-eslint/restrict-template-expressions': [
         'error',
         {
