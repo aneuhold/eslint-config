@@ -5,10 +5,15 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import eslintPluginSvelte from 'eslint-plugin-svelte';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
-import svelteParser from 'svelte-eslint-parser';
 import tseslint from 'typescript-eslint';
 
-const defaultConfig = defineConfig(
+// Shared extraFileExtensions constant to avoid project service reloads.
+// See: https://typescript-eslint.io/troubleshooting/typed-linting/performance/#changes-to-extrafileextensions-with-projectservice
+const extraFileExtensions = ['.svelte'];
+
+export default defineConfig(
+  // 1. Global config: applies to all linted files (js, ts, svelte)
+  //    Sets up ESLint recommended + TypeScript strict + JSDoc + Prettier compat
   {
     files: ['**/*.js', '**/*.ts', '**/*.svelte'],
     extends: [
@@ -24,13 +29,13 @@ const defaultConfig = defineConfig(
       parser: tseslint.parser,
       parserOptions: {
         sourceType: 'module',
-        extraFileExtensions: ['.svelte'],
+        extraFileExtensions,
         projectService: true,
       },
       globals: { ...globals.browser, ...globals.node },
     },
     // Rules for js, and ts in ts files and svelte files
-    //don't set 'svelte/*' rules here
+    // Don't set 'svelte/*' rules here
     rules: {
       // Makes it so that there's 1 line above tags in jsdoc comments.
       'jsdoc/tag-lines': ['warn', 'any', { startLines: 1 }],
@@ -84,12 +89,16 @@ const defaultConfig = defineConfig(
       // Disabled because on the frontend, it isn't always necessary to await
       // a promise.
       '@typescript-eslint/no-floating-promises': 'off',
-      // The below have to be disabled because of the issue with svelte TS
-      // types not being recognized in TS files, and vice versa.
+      // The below have to be disabled because svelte-eslint-parser cannot
+      // resolve types from imported .svelte files (it doesn't use svelte2tsx
+      // like VS Code's Svelte extension does), so types from
+      // ComponentProps<typeof SvelteComponent> and similar patterns resolve
+      // as `any`. See: https://github.com/sveltejs/eslint-plugin-svelte/issues/1303
       '@typescript-eslint/no-unsafe-member-access': 'off',
       '@typescript-eslint/no-unsafe-call': 'off',
       '@typescript-eslint/no-unsafe-return': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -104,51 +113,55 @@ const defaultConfig = defineConfig(
       '@typescript-eslint/no-unnecessary-type-parameters': 'off',
     },
   },
+
+  // 2. Disable type-aware linting on JS files
   {
-    // disable type-aware linting on JS files
     files: ['**/*.js'],
     extends: [tseslint.configs.disableTypeChecked],
-  }
-);
+  },
 
-const svelteConfig = defineConfig({
-  files: ['**/*.svelte'],
+  // 3. Svelte config: recommended rules + prettier compat for svelte files.
+  //    eslint-plugin-svelte's flat/recommended already includes base config
+  //    which sets up svelte-eslint-parser and the svelte processor.
+  //    flat/prettier disables svelte rules that conflict with Prettier.
   // @ts-expect-error - eslint-plugin-svelte is not typed
-  extends: [
-    ...eslintPluginSvelte.configs['flat/recommended'],
-    ...eslintPluginSvelte.configs['flat/prettier'],
-  ],
-  languageOptions: {
-    parser: svelteParser,
-    parserOptions: {
-      parser: tseslint.parser,
-      sourceType: 'module',
-      extraFileExtensions: ['.svelte'],
-      projectService: true,
+  ...eslintPluginSvelte.configs['flat/recommended'],
+  // @ts-expect-error - eslint-plugin-svelte is not typed
+  ...eslintPluginSvelte.configs['flat/prettier'],
+
+  // 4. TypeScript integration for Svelte files: tell svelte-eslint-parser
+  //    to delegate <script> parsing to @typescript-eslint/parser with
+  //    project service for type-aware linting.
+  //    See: https://sveltejs.github.io/eslint-plugin-svelte/ (TypeScript project section)
+  {
+    files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
+    languageOptions: {
+      parserOptions: {
+        parser: tseslint.parser,
+        extraFileExtensions,
+        projectService: true,
+      },
     },
   },
-  // Svelte Rules
-  rules: {
-    'svelte/no-navigation-without-resolve': [
-      'error',
-      {
-        ignoreGoto: false,
-        ignoreLinks: true,
-        ignorePushState: false,
-        ignoreReplaceState: false,
-      },
-    ],
-  },
-});
 
-export default defineConfig(
-  ...defaultConfig,
-  ...svelteConfig,
+  // 5. Svelte rule overrides
   {
-    // other override settings. e.g. for `files: ['**/*.test.*']`
+    files: ['**/*.svelte'],
+    rules: {
+      'svelte/no-navigation-without-resolve': [
+        'error',
+        {
+          ignoreGoto: false,
+          ignoreLinks: true,
+          ignorePushState: false,
+          ignoreReplaceState: false,
+        },
+      ],
+    },
   },
+
+  // 6. Global ignores
   {
-    // overrides global ignores
     ignores: ['.svelte-kit', '.yarn', 'build', 'node_modules', '**/.DS_Store'],
   }
 );
