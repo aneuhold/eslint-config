@@ -111,6 +111,12 @@ export default defineConfig(
       // Turned off because it doesn't seem too helpful, and it likes to error
       // on things that seem to be just fine in generics.
       '@typescript-eslint/no-unnecessary-type-parameters': 'off',
+      // Disabled due to false positives with Svelte components
+      '@typescript-eslint/no-useless-default-assignment': 'off',
+      // Disabled because it wasn't working correctly with Svelte snippets
+      '@typescript-eslint/no-confusing-void-expression': 'off',
+      // Disabled because it doesn't make sense IMO. This should be disabled globally.
+      '@typescript-eslint/prefer-literal-enum-member': 'off',
     },
   },
 
@@ -148,15 +154,8 @@ export default defineConfig(
   {
     files: ['**/*.svelte'],
     rules: {
-      'svelte/no-navigation-without-resolve': [
-        'error',
-        {
-          ignoreGoto: false,
-          ignoreLinks: true,
-          ignorePushState: false,
-          ignoreReplaceState: false,
-        },
-      ],
+      // Disabling this because we have a bunch of dynamic routes
+      'svelte/no-navigation-without-resolve': 'off',
     },
   },
 
