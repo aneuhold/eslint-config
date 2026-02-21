@@ -29,7 +29,7 @@ const defaultConfig = defineConfig(
       'jsdoc/require-returns': 'off',
       // Disabled because it doesn't seem to support triple back-tick code blocks at the moment
       // 2/21/2026.
-      'jsdoc/escape-inline-tags': 'false',
+      'jsdoc/escape-inline-tags': 'off',
       'no-use-before-define': 'off',
       'no-undef': 'off',
       // Just 100% disagree with this rule. The reasoning is that using a
