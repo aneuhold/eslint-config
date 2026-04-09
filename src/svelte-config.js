@@ -111,6 +111,19 @@ export default defineConfig(
       // Turned off because it doesn't seem too helpful, and it likes to error
       // on things that seem to be just fine in generics.
       '@typescript-eslint/no-unnecessary-type-parameters': 'off',
+      // Ban type assertions (as X) to prevent type-avoidance
+      '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
+      // Ban the `object` type to prevent type-avoidance
+      '@typescript-eslint/no-restricted-types': [
+        'error',
+        {
+          types: {
+            object: {
+              message: 'The `object` type is too loose. Use a specific type instead.',
+            },
+          },
+        },
+      ],
       // Disabled due to false positives with Svelte components
       '@typescript-eslint/no-useless-default-assignment': 'off',
       // Disabled because it wasn't working correctly with Svelte snippets
