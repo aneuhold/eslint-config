@@ -1,9 +1,11 @@
-import tsLibConfig from './src/ts-lib-config.js';
+import { type TSESLint } from '@typescript-eslint/utils';
+import tsLibConfig from './src/configs/ts-lib-config';
 
-/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.ConfigArray} */
-export default [
+const config: TSESLint.FlatConfig.ConfigArray = [
   ...tsLibConfig,
-  { 
+  {
     // other override settings. e.g. for `files: ['**/*.test.*']`
-  }
-];   
+  },
+];
+
+export default config;

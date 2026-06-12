@@ -1,15 +1,16 @@
 import nextPlugin from '@next/eslint-plugin-next';
 import { defineConfig } from 'eslint/config';
-import reactConfig from './react-config.js';
-
-// Ya, this is kind of weird, but if you dig into the actual code in the next plugin, this is correct.
-const { flatConfig } = nextPlugin;
+import reactConfig from './react-config.ts';
 
 export default defineConfig(
   ...reactConfig,
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
-    extends: [flatConfig.recommended],
+    // @next/eslint-plugin-next is not typed, so `flatConfig` resolves as an
+    // unresolvable type.
+    // @ts-expect-error - `flatConfig` exists at runtime but isn't in the plugin's types.
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    extends: [nextPlugin.flatConfig.recommended],
     rules: {
       // Allow export names that are used by Next.js in the app directory.
       'react-refresh/only-export-components': [
