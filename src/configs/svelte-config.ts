@@ -6,6 +6,7 @@ import eslintPluginSvelte from 'eslint-plugin-svelte';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import { aneuholdRules } from '../rules';
 
 // Shared extraFileExtensions constant to avoid project service reloads.
 // See: https://typescript-eslint.io/troubleshooting/typed-linting/performance/#changes-to-extrafileextensions-with-projectservice
@@ -21,6 +22,7 @@ export default defineConfig(
       ...tseslint.configs.strictTypeChecked,
       jsdoc.configs['flat/recommended-typescript'],
       eslintPluginPrettierRecommended,
+      aneuholdRules,
     ],
     plugins: {
       'simple-import-sort': simpleImportSort,
@@ -143,9 +145,7 @@ export default defineConfig(
   //    eslint-plugin-svelte's flat/recommended already includes base config
   //    which sets up svelte-eslint-parser and the svelte processor.
   //    flat/prettier disables svelte rules that conflict with Prettier.
-  // @ts-expect-error - eslint-plugin-svelte is not typed
   ...eslintPluginSvelte.configs['flat/recommended'],
-  // @ts-expect-error - eslint-plugin-svelte is not typed
   ...eslintPluginSvelte.configs['flat/prettier'],
 
   // 4. TypeScript integration for Svelte files: tell svelte-eslint-parser

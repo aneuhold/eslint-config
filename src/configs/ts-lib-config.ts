@@ -4,8 +4,9 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import { aneuholdRules } from '../rules';
 
-const defaultConfig = defineConfig(
+export default defineConfig(
   {
     files: ['**/*.js', '**/*.mjs', '**/*.ts'],
     extends: [
@@ -13,6 +14,7 @@ const defaultConfig = defineConfig(
       ...tseslint.configs.strictTypeChecked,
       jsdoc.configs['flat/recommended-typescript'],
       eslintPluginPrettierRecommended,
+      aneuholdRules,
     ],
     languageOptions: {
       parser: tseslint.parser,
@@ -70,15 +72,8 @@ const defaultConfig = defineConfig(
     // disable type-aware linting on JS files
     files: ['**/*.js', '**/*.mjs'],
     extends: [tseslint.configs.disableTypeChecked],
-  }
-);
-
-export default defineConfig(
-  ...defaultConfig,
-  {
-    // other override settings. e.g. for `files: ['**/*.test.*']`
   },
   {
     ignores: ['.yarn', 'build', 'lib', 'node_modules', 'eslint.config.js', '**/.DS_Store'],
-  } // overrides global ignores
+  }
 );

@@ -4,12 +4,12 @@ Personal ESLint Configuration
 
 ## Notes on Architecture
 
-- TypeScript was specifically avoided in this library because it was complicating the build step. It might work in this repo, but it kept causing issues in consuming repos. JS by itself seems to work great.
+- This library is authored in **raw TypeScript with no build step**. The configs and rule source ship as `.ts`, and each consumer's ESLint transpiles them on the fly via [jiti](https://github.com/unjs/jiti).
 - All dependencies should be able to be only defined in this repo outside of ESLint and Prettier, as those will be brought in to consuming repos as peer deps.
 - In order for there not to be crossover between configuration dependencies, each config should be brought in as the full path to the configuration. For example:
 
-```js
-import tsLibConfig from '@aneuhold/eslint-config/src/ts-lib-config.js';
+```ts
+import tsLibConfig from '@aneuhold/eslint-config/src/configs/ts-lib-config';
 ```
 
 ## Usage
@@ -45,66 +45,27 @@ Make sure to add the following settings to VSCode settings.json:
 
 Then add a prettier file, such as the one in this repo [here](.prettierrc.js).
 
-### Setup for `CommonJS`
+The config sources are `.ts`, so add an `eslint.config.ts` that spreads in the
+config for your stack. ESLint transpiles both your config and the package's
+sources on the fly via jiti — no build step.
 
-Add `eslint.config.js` like so:
+```ts
+import tsLibConfig from '@aneuhold/eslint-config/src/configs/ts-lib-config';
 
-```js
-const config = (async () => (await import('./eslint.config.mjs')).default)();
-
-module.exports = config;
-```
-
-Add `eslint.config.mjs` like so:
-
-```js
-// @ts-check
-
-import tsLibConfig from '@aneuhold/eslint-config/src/ts-lib-config.js';
-
-/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.ConfigArray} */
 export default [
   ...tsLibConfig,
   {
-    // other override settings. e.g. for `files: ['**/*.test.*']`
+    // your overrides, e.g. for `files: ['**/*.test.*']`
   },
 ];
 ```
 
-### Setup for `ESNext` (ES Modules)
+Swap `ts-lib-config` for whichever config matches the project: `svelte-config`,
+`react-config`, `react-next-config`, or `angular-config`.
 
-Add `eslint.config.js` like so:
+**Monorepo:** if nested folders have their own configs, add an `ignores` entry
+so the top-level config doesn't also lint them:
 
-```js
-// @ts-check
-
-import svelteConfig from '@aneuhold/eslint-config/src/svelte-config.js';
-
-/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.ConfigArray} */
-export default [
-  ...svelteConfig,
-  {
-    // other override settings. e.g. for `files: ['**/*.test.*']`
-  },
-];
-```
-
-### Setup for Monorepo
-
-If you have specific configs for different folders, make sure to exclude those folders in the top-level config! For example:
-
-```js
-import tsLibConfig from '@aneuhold/eslint-config/src/ts-lib-config.js';
-
-/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.ConfigArray} */
-export default [
-  ...tsLibConfig,
-  {
-    // other override settings. e.g. for `files: ['**/*.test.*']`
-    rules: {},
-  },
-  {
-    ignores: ['**/lib', 'svelte', 'react'],
-  },
-];
+```ts
+{ ignores: ['**/lib', 'svelte', 'react'] }
 ```
