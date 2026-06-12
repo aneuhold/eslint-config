@@ -6,8 +6,8 @@ setupEslintRuleTester();
 
 const ruleTester = new RuleTester({
   languageOptions: {
-    parserOptions: { ecmaVersion: 'latest', sourceType: 'module' }
-  }
+    parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  },
 });
 
 /**
@@ -23,7 +23,7 @@ const validService = (className: string): string => {
     `  private helper(): void {}`,
     `}`,
     `const ${instance} = new ${className}();`,
-    `export default ${instance};`
+    `export default ${instance};`,
   ].join('\n');
 };
 
@@ -36,32 +36,32 @@ ruleTester.run('service-file-structure', serviceFileStructure, {
     // Exporting the class itself as default is allowed (extensible base).
     {
       filename: 'Foo.service.ts',
-      code: `export default class FooService {}`
+      code: `export default class FooService {}`,
     },
     // Exporting the named class as default is also allowed.
     {
       filename: 'Foo.service.ts',
-      code: [`class FooService {}`, `export default FooService;`].join('\n')
+      code: [`class FooService {}`, `export default FooService;`].join('\n'),
     },
     // Out-of-scope file: not a service name, so anything goes.
     { filename: 'helpers.ts', code: `export function stray() {}` },
     // Test files are excluded from the gate.
     { filename: 'Foo.service.test.ts', code: `export function stray() {}` },
     // Mock files are excluded from the gate.
-    { filename: 'SetMap.service.mock.ts', code: `export const thing = () => {};` }
+    { filename: 'SetMap.service.mock.ts', code: `export const thing = () => {};` },
   ],
   invalid: [
     // A service file not following the `<Name>.service.ts` naming convention.
     {
       filename: 'FooService.ts',
       code: validService('FooService'),
-      errors: [{ messageId: 'fileNaming' }]
+      errors: [{ messageId: 'fileNaming' }],
     },
     // A `.service.ts` file whose name is not PascalCase (lowercase first letter).
     {
       filename: 'foo.service.ts',
       code: validService('FooService'),
-      errors: [{ messageId: 'fileNaming' }]
+      errors: [{ messageId: 'fileNaming' }],
     },
     // Inline `export default new X()` is rewritten to the two-line form.
     {
@@ -71,8 +71,8 @@ ruleTester.run('service-file-structure', serviceFileStructure, {
       output: [
         `class FooService {}`,
         `const fooService = new FooService();`,
-        `export default fooService;`
-      ].join('\n')
+        `export default fooService;`,
+      ].join('\n'),
     },
     // Constructor arguments are preserved by the fix.
     {
@@ -82,8 +82,8 @@ ruleTester.run('service-file-structure', serviceFileStructure, {
       output: [
         `class FooService {}`,
         `const fooService = new FooService(1, 2);`,
-        `export default fooService;`
-      ].join('\n')
+        `export default fooService;`,
+      ].join('\n'),
     },
     // Wrong instance name is reported with no safe fix.
     {
@@ -92,7 +92,7 @@ ruleTester.run('service-file-structure', serviceFileStructure, {
         '\n'
       ),
       errors: [{ messageId: 'instanceName' }],
-      output: null
+      output: null,
     },
     // A top-level function declaration is forbidden.
     {
@@ -101,9 +101,9 @@ ruleTester.run('service-file-structure', serviceFileStructure, {
         `class FooService {}`,
         `function helper() {}`,
         `const fooService = new FooService();`,
-        `export default fooService;`
+        `export default fooService;`,
       ].join('\n'),
-      errors: [{ messageId: 'noTopLevelFunction' }]
+      errors: [{ messageId: 'noTopLevelFunction' }],
     },
     // A top-level value `const` is forbidden.
     {
@@ -112,9 +112,9 @@ ruleTester.run('service-file-structure', serviceFileStructure, {
         `class FooService {}`,
         `const MAX = 5;`,
         `const fooService = new FooService();`,
-        `export default fooService;`
+        `export default fooService;`,
       ].join('\n'),
-      errors: [{ messageId: 'noTopLevelVariable' }]
+      errors: [{ messageId: 'noTopLevelVariable' }],
     },
     // A top-level arrow-function `const` is forbidden.
     {
@@ -123,9 +123,9 @@ ruleTester.run('service-file-structure', serviceFileStructure, {
         `class FooService {}`,
         `const helper = () => {};`,
         `const fooService = new FooService();`,
-        `export default fooService;`
+        `export default fooService;`,
       ].join('\n'),
-      errors: [{ messageId: 'noTopLevelVariable' }]
+      errors: [{ messageId: 'noTopLevelVariable' }],
     },
     // A top-level named `export const` is forbidden.
     {
@@ -134,9 +134,9 @@ ruleTester.run('service-file-structure', serviceFileStructure, {
         `class FooService {}`,
         `export const value = 1;`,
         `const fooService = new FooService();`,
-        `export default fooService;`
+        `export default fooService;`,
       ].join('\n'),
-      errors: [{ messageId: 'noTopLevelVariable' }]
+      errors: [{ messageId: 'noTopLevelVariable' }],
     },
     // More than one class is not allowed.
     {
@@ -145,15 +145,15 @@ ruleTester.run('service-file-structure', serviceFileStructure, {
         `class AService {}`,
         `class BService {}`,
         `const aService = new AService();`,
-        `export default aService;`
+        `export default aService;`,
       ].join('\n'),
-      errors: [{ messageId: 'singleClassOnly' }]
+      errors: [{ messageId: 'singleClassOnly' }],
     },
     // No class at all.
     {
       filename: 'Foo.service.ts',
       code: `export const value = 1;`,
-      errors: [{ messageId: 'classRequired' }]
-    }
-  ]
+      errors: [{ messageId: 'classRequired' }],
+    },
+  ],
 });
