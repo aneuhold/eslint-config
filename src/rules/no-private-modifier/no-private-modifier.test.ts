@@ -22,6 +22,8 @@ ruleTester.run('no-private-modifier', noPrivateModifier, {
     { code: `class Foo { accessor #x = 1; }` },
     { code: `class Foo { get #x(): number { return 1; } }` },
     { code: `class Foo { constructor(foo: string) {} }` },
+    // Private constructors are allowed (no `#` constructor exists).
+    { code: `class Foo { private constructor() {} }` },
     // Constructor parameter properties are allowed (no `#` shorthand exists).
     { code: `class Foo { constructor(private foo: string) {} }` },
     { code: `class Foo { constructor(private readonly foo: string) {} }` },
@@ -74,12 +76,6 @@ ruleTester.run('no-private-modifier', noPrivateModifier, {
       code: `class Foo { private count = 0; private helper() { return this.count; } }`,
       errors: [{ messageId: 'privateField' }, { messageId: 'privateMethod' }],
       output: `class Foo { #count = 0; #helper() { return this.#count; } }`,
-    },
-    // Private constructor: reported, never fixed.
-    {
-      code: `class Foo { private constructor() {} }`,
-      errors: [{ messageId: 'privateConstructor' }],
-      output: null,
     },
     // Possible cross-instance access (`other.id`) is ambiguous, so no fix.
     {

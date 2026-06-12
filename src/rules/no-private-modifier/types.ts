@@ -10,7 +10,7 @@ export type FixableMember =
   | TSESTree.MethodDefinition;
 
 /** A message this rule can report. */
-export type MessageId = 'privateField' | 'privateMethod' | 'privateConstructor';
+export type MessageId = 'privateField' | 'privateMethod';
 
 /** A member to convert, paired with the references that convert alongside it. */
 export type FixTarget = { member: FixableMember; refs: TSESTree.MemberExpression[] };
