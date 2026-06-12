@@ -30,9 +30,7 @@ export const collectClassReports = (frame: ClassFrame): ClassReports => {
     if (member.accessibility !== 'private') {
       continue;
     }
-
     if (member.type === AST_NODE_TYPES.MethodDefinition && member.kind === 'constructor') {
-      reports.push({ member, messageId: 'privateConstructor' });
       continue;
     }
 

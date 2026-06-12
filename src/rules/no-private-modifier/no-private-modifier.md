@@ -14,10 +14,13 @@ Every form of the `private` modifier on a class member is reported:
 
 - Instance and `static` fields, including `accessor` properties.
 - Instance and `static` methods, getters, and setters.
-- Constructors (`private constructor() {}`).
 
 `public` and `protected` members, and members with no modifier, are left alone —
 this rule is only concerned with replacing `private`.
+
+**Private constructors are allowed.** `private constructor() {}` has no `#`
+equivalent — a constructor cannot be a `#private` member — and restricting
+construction this way (e.g. to force a static factory) is a valid pattern.
 
 **Constructor parameter properties are allowed.** `constructor(private foo: T)`
 is a concise, readable shorthand that declares and assigns the field in one
@@ -42,8 +45,6 @@ class Counter {
   private accessor label = '';
 
   private increment(): void {}
-
-  private constructor() {}
 }
 ```
 
@@ -56,6 +57,8 @@ class Counter {
   accessor #label = '';
 
   #increment(): void {}
+
+  private constructor() {}
 }
 
 class Service {

@@ -10,9 +10,9 @@ import { type ClassFrame, type ClassNode } from './types';
  * syntax rather than the TypeScript `private` accessibility modifier, and
  * autofixes the conversion — declaration plus `this.x` / `ClassName.x`
  * references — whenever it can do so safely. Covers instance and static fields,
- * methods (including accessors and getters/setters), and constructors.
- * Constructor parameter properties (`constructor(private foo)`) are
- * intentionally allowed, since the `#` form has no equivalent shorthand.
+ * and methods (including accessors and getters/setters). Private constructors
+ * and constructor parameter properties (`constructor(private foo)`) are
+ * intentionally allowed, since the `#` form has no equivalent.
  *
  * References are gathered as ESLint makes its single pass over the file: a stack
  * tracks the class currently being traversed, and a per-class counter tracks how
@@ -33,8 +33,6 @@ export const noPrivateModifier = createRule({
         'Use a `#private` field instead of the TypeScript `private` modifier (e.g. `#count` rather than `private count`).',
       privateMethod:
         'Use a `#private` method instead of the TypeScript `private` modifier (e.g. `#helper()` rather than `private helper()`).',
-      privateConstructor:
-        'A constructor cannot become a `#private` member; drop the `private` modifier (consider a static factory if construction must be restricted).',
     },
     schema: [],
   },
