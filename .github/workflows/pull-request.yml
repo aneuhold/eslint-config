@@ -7,8 +7,8 @@ on:
       - main
 
 jobs:
-  buildAndTest:
-    name: 'Build and Test'
+  checkLintAndTest:
+    name: 'Check, Lint, and Test'
     runs-on: ubuntu-latest
 
     steps:
@@ -26,5 +26,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Run Type Checking
+        run: pnpm check
+
       - name: Run Linting
         run: pnpm lint
+
+      - name: Run Tests
+        run: pnpm test

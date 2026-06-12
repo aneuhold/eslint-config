@@ -9,6 +9,7 @@
     "unpub": "local-npm unpublish",
     "pushpub": "pnpm version patch && git push",
     "upgrade:all": "pnpm update --latest",
+    "check": "tsc --noEmit",
     "lint": "pnpm eslint",
     "test": "vitest run"
   },
