@@ -11,6 +11,7 @@ export type ClassReports = { reports: MemberReport[]; targets: FixTarget[] };
  * Turns a fully-populated frame into the per-member reports and the set of
  * fixable conversion targets. Each name claims its references once, so a
  * get/set pair sharing a name doesn't rewrite the same reference twice.
+ * Decorated members are skipped entirely — neither reported nor converted.
  *
  * @param frame The class frame, after traversal has recorded its references
  */
@@ -31,6 +32,9 @@ export const collectClassReports = (frame: ClassFrame): ClassReports => {
       continue;
     }
     if (member.type === AST_NODE_TYPES.MethodDefinition && member.kind === 'constructor') {
+      continue;
+    }
+    if (member.decorators.length > 0) {
       continue;
     }
 

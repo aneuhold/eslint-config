@@ -10,9 +10,9 @@ import { type ClassFrame, type ClassNode } from './types';
  * syntax rather than the TypeScript `private` accessibility modifier, and
  * autofixes the conversion — declaration plus `this.x` / `ClassName.x`
  * references — whenever it can do so safely. Covers instance and static fields,
- * and methods (including accessors and getters/setters). Private constructors
- * and constructor parameter properties (`constructor(private foo)`) are
- * intentionally allowed, since the `#` form has no equivalent.
+ * and methods (including accessors and getters/setters). Private constructors,
+ * constructor parameter properties (`constructor(private foo)`), and decorated
+ * members are intentionally allowed, since the `#` form has no equivalent.
  *
  * References are gathered as ESLint makes its single pass over the file: a stack
  * tracks the class currently being traversed, and a per-class counter tracks how
