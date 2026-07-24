@@ -3,13 +3,16 @@ import { type ClassFrame, type ClassNode } from './types';
 
 /**
  * Creates a fresh frame for a class, scanning its members up-front for the
- * private names eligible to convert and the `#names` already in use.
+ * private names eligible to convert and the `#names` already in use. Decorated
+ * members are excluded and their names blocked, since TypeScript rejects
+ * decorators on `#private` members (`TS1206`).
  *
  * @param classNode The class declaration or expression
  */
 export const createClassFrame = (classNode: ClassNode): ClassFrame => {
   const candidateNames = new Set<string>();
   const existingPrivateNames = new Set<string>();
+  const decoratedNames = new Set<string>();
 
   for (const member of classNode.body.body) {
     if (
@@ -26,8 +29,18 @@ export const createClassFrame = (classNode: ClassNode): ClassFrame => {
       member.key.type === AST_NODE_TYPES.Identifier &&
       member.accessibility === 'private'
     ) {
-      candidateNames.add(member.key.name);
+      if (member.decorators.length > 0) {
+        decoratedNames.add(member.key.name);
+      } else {
+        candidateNames.add(member.key.name);
+      }
     }
+  }
+
+  // A name shared with a decorated member (such as a get/set pair where only
+  // one carries the decorator) has to stay put, so the pair keeps matching.
+  for (const name of decoratedNames) {
+    candidateNames.delete(name);
   }
 
   return {
@@ -37,7 +50,7 @@ export const createClassFrame = (classNode: ClassNode): ClassFrame => {
     existingPrivateNames,
     thisRefs: new Map(),
     staticRefs: new Map(),
-    blocked: new Set(),
+    blocked: decoratedNames,
     rebindDepth: 0,
   };
 };

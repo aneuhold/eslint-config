@@ -27,6 +27,9 @@ ruleTester.run('no-private-modifier', noPrivateModifier, {
     // Constructor parameter properties are allowed (no `#` shorthand exists).
     { code: `class Foo { constructor(private foo: string) {} }` },
     { code: `class Foo { constructor(private readonly foo: string) {} }` },
+    // Decorated members are allowed (decorators are invalid on `#private`).
+    { code: `class Foo { @Inject() private client!: Client; }` },
+    { code: `class Foo { @Log() private helper(): void {} }` },
     // `public`/`protected`/no-modifier members are out of scope.
     { code: `class Foo { public count = 0; }` },
     { code: `class Foo { protected helper(): void {} }` },
@@ -94,6 +97,13 @@ ruleTester.run('no-private-modifier', noPrivateModifier, {
       code: `class Foo { private val = 1; read() { const { val } = this; return val; } }`,
       errors: [{ messageId: 'privateField' }],
       output: null,
+    },
+    // A decorated member sits out the conversion entirely, references included,
+    // while an undecorated sibling still converts.
+    {
+      code: `class Foo { @Inject() private client!: Client; private count = 0; run() { this.client.send(this.count); } }`,
+      errors: [{ messageId: 'privateField' }],
+      output: `class Foo { @Inject() private client!: Client; #count = 0; run() { this.client.send(this.#count); } }`,
     },
     // A colliding `#count` already exists, so the rename is unsafe — report only.
     {

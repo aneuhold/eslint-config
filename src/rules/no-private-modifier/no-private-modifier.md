@@ -27,6 +27,13 @@ is a concise, readable shorthand that declares and assigns the field in one
 place, and `#private` has no equivalent. Flagging it would force the verbose
 field-plus-assignment form for no real benefit, so the rule permits it.
 
+**Decorated members are allowed.** TypeScript rejects decorators on `#private`
+fields and methods with `TS1206: Decorators are not valid here.`, so a decorated
+member has no `#` form to convert to. Reporting one would only force an
+`eslint-disable` comment for something that cannot be fixed, so the rule skips
+it — no report, and neither the declaration nor its `this.name` references are
+rewritten.
+
 ## Autofix
 
 None. Converting `private` to `#` requires renaming every reference
@@ -64,6 +71,10 @@ class Counter {
 class Service {
   // Parameter properties are allowed.
   constructor(private readonly client: Client) {}
+
+  // Decorated members are allowed.
+  @WebSocketServer()
+  private server!: SocketServer;
 }
 ```
 

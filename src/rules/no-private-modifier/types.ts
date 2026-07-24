@@ -31,7 +31,7 @@ export type ClassFrame = {
   thisRefs: Map<string, TSESTree.MemberExpression[]>;
   /** `ClassName.name` accesses (statics) that an autofix would rewrite. */
   staticRefs: Map<string, TSESTree.MemberExpression[]>;
-  /** Names with a reference the fix can't safely rewrite, so won't be touched. */
+  /** Names the fix can't safely rewrite, so won't be touched. */
   blocked: Set<string>;
   /**
    * How many non-arrow functions are currently open inside this class without
