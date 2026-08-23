@@ -75,6 +75,9 @@ importers:
       '@aneuhold/local-npm-registry':
         specifier: ^0.2.32
         version: 0.2.32(encoding@0.1.13)(typanion@3.14.0)
+      '@aneuhold/robot-instructions':
+        specifier: ^0.1.2
+        version: 0.1.2
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
@@ -164,6 +167,9 @@ packages:
   '@aneuhold/local-npm-registry@0.2.32':
     resolution: {integrity: sha512-Iyw1fnZiUrdM9cyj8YaWM2oOtzkvhUBBuHxS4iLtDBjMnFbLmrg190FoafCgJKikn4V6cYwLJ7m0wSrX2EHxbA==}
     hasBin: true
+
+  '@aneuhold/robot-instructions@0.1.2':
+    resolution: {integrity: sha512-eUA5qaSJTPKY9PRKSmYQLL4U2uGb1bLs+VjF5irXGpchyg4R8Ku5LBs401xh/F3bhmEFt9jnCVkqVNpUAojJmA==}
 
   '@angular-devkit/architect@0.2101.3':
     resolution: {integrity: sha512-vKz8aPA62W+e9+pF6ct4CRDG/MjlIH7sWFGYkxPPRst2g46ZQsRkrzfMZAWv/wnt6OZ1OwyRuO3RW83EMhag8g==}
@@ -4028,6 +4034,8 @@ snapshots:
       - react-native-b4a
       - supports-color
       - typanion
+
+  '@aneuhold/robot-instructions@0.1.2': {}
 
   '@angular-devkit/architect@0.2101.3':
     dependencies:

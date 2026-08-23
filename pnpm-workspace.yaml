@@ -2,3 +2,8 @@
 # released bad version can't sneak into installs/updates.
 # 7 * 24 * 60 minutes = 10080.
 minimumReleaseAge: 10080
+
+# The `@aneuhold/*` packages are consumed right after they are published, so
+# they cannot wait out the release age above.
+minimumReleaseAgeExclude:
+  - '@aneuhold/*'
